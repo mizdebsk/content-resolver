@@ -1,7 +1,13 @@
-from fedora:31
+FROM registry.fedoraproject.org/fedora:31
 
-run dnf -y update fedora-gpg-keys && \
-    dnf -y install graphviz podman python3-jinja2 python3-yaml && \
-    dnf clean all
+RUN : \
+ && dnf -y --refresh update \
+ && dnf -y install \
+      graphviz \
+      podman \
+      python3-jinja2 \
+      python3-yaml \
+ && dnf -y clean all \
+ && :
 
-workdir /workspace
+COPY ./ /opt/content-resolver/
